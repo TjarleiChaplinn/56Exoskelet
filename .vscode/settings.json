@@ -1,4 +1,8 @@
 {
     "editor.fontSize": 14,
-    "python.pythonPath": "/Library/Developer/CommandLineTools/usr/bin/python3"
+    "python.pythonPath": "/Library/Frameworks/Python.framework/Versions/3.8/bin/python3",
+    "python.envFile": ".env",
+    "python.linting.pylintArgs": ["----extension-pkg-whitelist=1xml"]
+
+
 }
