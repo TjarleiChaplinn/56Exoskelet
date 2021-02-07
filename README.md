@@ -7,3 +7,7 @@ Deelnemers:
   Milan Borsboom,
   Damian de Bruin,
   Charlie de Raaf
+
+Belangrijke bestanden:
+  RosRaspberryPi/src/exoSim/scripts/.
+  
