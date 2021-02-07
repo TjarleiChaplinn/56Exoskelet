@@ -21,3 +21,4 @@ void receiveEvent() {
 void sendEvent() {
   Wire.write(receivedTime);
 }
+
