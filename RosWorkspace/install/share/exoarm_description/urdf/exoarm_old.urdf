@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot name="exo_arm">
+<!-- definities onderdelen-->
+
+  <!-- bovenarm-->
+  <link name="upper_arm">
+    <inertial>
+      <mass value="10" />
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+
+    <collision>
+      <geometry>
+        <cylinder radius="0.07" length="0.4" />
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0.0 0.0 -0.2" rpy="0.0 0.0 0.0"/>
+      <geometry>
+        <cylinder radius="0.07" length="0.4" />
+      </geometry>
+    </visual>
+  </link>
+
+  <!-- onderarm-->
+  <link name="under_arm">
+    <inertial>
+      <mass value="10" />
+      <inertia ixx="0.4" ixy="0.0" ixz="0.0" iyy="0.4" iyz="0.0" izz="0.2"/>
+    </inertial>
+
+      <collision>
+        <geometry>
+          <cylinder radius="0.06" length="0.35" />
+        </geometry>
+      </collision>
+      <visual>
+        <origin xyz="0.0 0.0 0.16" rpy="0.0 0.0 0.0"/>
+        <geometry>
+          <cylinder radius="0.06" length="0.4" />
+        </geometry>
+      </visual>
+    </link>
+
+  <!-- elleboog definitie en settings-->
+  <joint name="elbow" type="continuous">
+    <limit effort="1000.0" lower="0.0" upper="2.0"/>
+    <parent link="upper_arm"/>
+    <child link="under_arm"/>
+    <axis xyz="1 0 0"/>
+  </joint>
+
+  <!-- Gazebo-->
+
+  <!-- plugin-->
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="geen idee hoe het heet">
+      <robotNamespace>/simple_model</robotNamespace>
+    </plugin>
+  </gazebo>
+
+  <!-- transmissie van ros naar gazebo-->
+  <transmission name="transmission_upper_lower_arm">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="elbow_movement">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="elbow">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+</robot>

@@ -1,0 +1,30 @@
+<launch>
+    
+    <arg name="sim" default="true" />
+    <arg name="debug" default="false" />
+    <arg name="fake" default="false" />
+    
+    <remap if="$(arg sim)" from="/follow_joint_trajectory" to="/arm_controller/follow_joint_trajectory"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <rosparam param="source_list">[/joint_states]</rosparam>
+        <!-- <rosparam param="source_list">[move_group/fake_controller_joint_states]</rosparam> -->
+    </node>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen">
+    </node>
+    
+    <include file="$(find arm_moveit_config)/launch/move_group.launch">
+        <arg name="debug" default="$(arg debug)"/>
+        <arg name="fake_execution" default="$(arg fake)"/>
+    </include>
+    
+    <include file="$(find arm_moveit_config)/launch/gazebo.launch"/>
+    <include file="$(find arm_moveit_config)/launch/moveit_rviz.launch">
+        <arg name="rviz_config" value="$(find arm_moveit_config)/launch/moveit.rviz"/>
+    </include>
+    
+    <node name="serial_node" pkg="rosserial_python" type="serial_node.py" output="screen">
+        <rosparam param="_port">/dev/ttyUSB0</rosparam>
+    </node>
+    
+    <node name="simulation" pkg="exoarm_simulatie" type="simulation.py" output="screen"/>
+</launch>

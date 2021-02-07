@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: exoarm_description
+    relative_path: urdf/exoarm.xacro
+    xacro_args: ""
+  SRDF:
+    relative_path: config/exoarm.srdf
+  CONFIG:
+    author_name: Charlie
+    author_email: charlie@gmail.com
+    generated_timestamp: 1612274942
