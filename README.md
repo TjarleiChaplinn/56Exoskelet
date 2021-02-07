@@ -10,4 +10,5 @@ Deelnemers:
 
 Belangrijke bestanden:
   RosRaspberryPi/src/exoSim/scripts/.
-  
+  RosWorkspace/src/exoarm_simulatie/scripts/.
+  Onderzoeken/python files
